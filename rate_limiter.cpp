@@ -6,7 +6,7 @@ RateLimiter::RateLimiter(unsigned int maxRequests, unsigned int windowSize,
       TimeProvider_(timeProvider) {}
 
 bool RateLimiter::ShouldAllow(std::string clientId) {
-  auto clientData = Clients_[clientId];
+  auto &clientData = Clients_[clientId];
 
   while (!clientData.TimeStamps.empty() &&
          (TimeProvider_.Now() - clientData.TimeStamps.front() > WindowSize_)) {
